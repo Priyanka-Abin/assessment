@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .sidebar-nav {
+            list-style-type: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav button {
+            width: 100%;
+            padding: 10px;
+            text-align: left;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .sidebar-nav button:hover,
+        .sidebar-nav button.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #ffffff;
+            transition: margin-left 0.3s ease;
+        }
+
+        .content.full-width {
+            margin-left: 0;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h1, h2 {
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+    <div class="sidebar" id="sidebar">
+        <ul class="sidebar-nav">
+            <li><button onclick="showSection('getting-started')" class="active">Getting Started</button></li>
+            <li><button onclick="showSection('features')">Features</button></li>
+            <li><button onclick="showSection('support')">Support</button></li>
+            <li><button onclick="showSection('about')">About</button></li>
+        </ul>
+    </div>
+
+    <div class="content" id="content">
+        <div id="getting-started" class="section active">
+            <h1>Getting Started</h1>
+            <p>Welcome to our help guide! This section will help you understand the basics of our platform.</p>
+            <h2>First Steps</h2>
+            <ul>
+                <li>Create an account</li>
+                <li>Complete your profile</li>
+                <li>Explore key features</li>
+            </ul>
+        </div>
+
+        <div id="features" class="section">
+            <h1>Features</h1>
+            <p>Discover the powerful features of our platform.</p>
+            <h2>Key Capabilities</h2>
+            <ul>
+                <li>Advanced search</li>
+                <li>Customization options</li>
+                <li>Integration tools</li>
+            </ul>
+        </div>
+
+        <div id="support" class="section">
+            <h1>Support</h1>
+            <p>We're here to help you!</p>
+            <h2>Contact Options</h2>
+            <ul>
+                <li>Email: support@example.com</li>
+                <li>Phone: 1-800-HELP-NOW</li>
+                <li>Live Chat: Available 24/7</li>
+            </ul>
+        </div>
+
+        <div id="about" class="section">
+            <h1>About Us</h1>
+            <p>Learn more about our mission and values.</p>
+            <h2>Our Mission</h2>
+            <p>To provide the best user experience possible.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const content = document.getElementById('content');
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('full-width');
+        }
+
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active button
+            document.querySelectorAll('.sidebar-nav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
